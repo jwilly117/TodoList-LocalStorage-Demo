@@ -17,7 +17,61 @@
 
 
 <body>
+
+    <!-- Title -->
+    <h1>To Do list</h1>
+
+    <!-- Todo Input Form -->
+    <form>
+        <span id="todo-item"><strong>To Do Item</strong><input id="to-do" type="text" ><input id="add-to-do" value="Add Item" type="submit"></span>
+    </form>
+
+    <!-- Todo Div -->
+    <div id="to-dos">
+
+    </div>
+
+    <!-- Script -->
+
+    <script>
+    var toDoCount =0;
+
+    // On click event associated with the add to do function
+    $("#add-to-do").on("click", function(event){
+        event.preventDefault();
+
+        var toDoTask = $("#to-do").val().trim();
+
+        var toDoItem = $("<p>");
+
+        toDoItem.attr("id", "item-" + toDoCount);
+        toDoItem.text(toDoTask);
+
+        var toDoClose = $("<button>");
+
+            toDoClose.attr("data-to-do", toDoCount);
+            toDoClose.addClass("checkbox");
+            toDoClose.text("✓"); 
+
+
+            toDoItem = toDoItem.prepend(toDoClose);
+
+            $("#to-dos").append(toDoItem);
+
+            $("#to-do").val("");
+
+            toDoCount++;
+    });
+
+
+    $(document.body).on("click", ".checkbox", function(){
+        var toDoNumber = $(this).attr("data-to-do");
+
+        $("#item-" + toDoNumber).remove();
+    })
     
+    </script>
+
 
 
 </body>
